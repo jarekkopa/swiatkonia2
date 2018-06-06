@@ -64,7 +64,7 @@ class AdvertsController extends Controller
      */
     public function show($id)
     {
-        //
+        return 'ID ogłoszenia to:' . $id . 'Działa, ale nie ma widoku';
     }
 
     /**
