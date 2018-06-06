@@ -28,22 +28,13 @@
         {{-- content         --}}
                 <div class="col-sm-10">
                     <div class="col-sm-5">
-                        {!! Form::open(['action' => 'AdvertsController@store', 'method' => 'POST']) !!}
-                        <div>
-                            {{-- tytuł --}}
-                            {{ Form::label ('title', 'Tytuł:')}} 
-                            {{ Form::text('title', '', ['class' => 'form-control'])}}
-                        </div>
-                        <div>
-                            {{-- opis --}}
-                            {{ Form::label ('description', 'Treść ogłoszenia:')}}
-                            {{ Form::textarea('description', '', ['class' => 'form-control'])}}
-                        </div>
-                        <div>
-                            {{-- wyślij --}}
-                            {{ Form::submit('Wyślij ogłoszenie', ['class' => 'btn btn-danger'])}}
-                        </div>
-                        {!! Form::close() !!}
+                        <form action="" method="POST>
+                            <label for="title">Tytuł ogłoszenia</label>
+                            <input name="title" id="title" placeholder="Podaj tytuł ogłoszenia" size="50" class="form-control">
+
+                            <label for="description">Treść ogłoszenia</label>
+                            <textarea name="description" id="description" placeholder="Podaj treść ogłoszenia"  class="form-control"></textarea>
+                        </form>
                     </div>
                 </div>
             </div>
