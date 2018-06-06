@@ -16,6 +16,7 @@ class AdvertsController extends Controller
     public function index()
     {
         $advert = Advert::all();
+
         return view('pages.index')->with('adverts', $advert);
     }
 
