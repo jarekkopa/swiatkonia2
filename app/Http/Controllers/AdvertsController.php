@@ -42,12 +42,14 @@ class AdvertsController extends Controller
             'title' => 'required',
             'description' => 'required',
             'region' => 'required',
+            'price' => 'numeric',
         ]);
 
         $advert = new Advert;
         $advert->title = $request->input('title');
         $advert->description = $request->input('description');
         $advert->state = $request->input('region');
+        $advert->price = $request->input('price');
         $advert->save();
 
         return redirect('/');
