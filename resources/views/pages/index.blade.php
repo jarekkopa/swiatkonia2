@@ -15,30 +15,47 @@
         
         {{-- slider --}}
         @include('pages.inc.slider');
-       
-        <div class="container-fluid">
-            <div class="row">
-        {{-- breadcrumos --}}
-                <h7>Tutaj jesteś: Home > coś tam - zrobić @inslude dla breadcrumps</h7>
-            </div>
 
+        <div class="container">
             <div class="row">
         {{-- lewa kolumna --}}
-                <div class="col-sm-2"><h5>lewa kolumna np. na menu kategorii lub filtry wyszukujące</h5> </div>
+                <div class="col-sm-3">lewa kolumna np. na menu kategorii lub filtry wyszukujące </div>
+
         {{-- content         --}}
-                <div class="col-sm-10">
-                    <h5>
-                        <ul>
-                           @if(count($adverts) > 0)
-                                @foreach($adverts as $advert)
-                                    <li>  {{ $advert->title }} </li>
-                                @endforeach
-                            @endif
-                        </ul>
-                    </h5>
+                <div class="col-sm-9">
+                    @if(count($adverts) > 0)
+                        @foreach($adverts as $advert)
+                            <div class="row">                           
+                                <div class="card">
+                                        <h5 class="card-header">{{ $advert->title }} <span class="badge badge-danger">Nowe</span></h5>
+                                        <div class="card-body">
+                                            {{-- <h5 class="card-title">Special title treatment</h5> --}}
+                                            <p class="card-text">{{ str_limit($advert->description, 300) }} </p>
+                                            <p class="card-text">
+                                                {{-- sprawdzenie czy podano cenę --}}
+                                                @if($advert->price)
+                                                    {{ $advert->price }} zł</p>
+                                                @else
+                                                    Cena: Za darmo
+                                                @endif
+                                            <p>
+                                            <a href="{{ route('adverts.show', $advert->id) }}" class="btn btn-outline-danger">Zobacz</a>
+                                        </div>
+                                        </div>
+                                        <p></p>
+                        
+                                {{-- <div class="col-sm-2">
+                                        <img src="/img/pict8.jpg" style="max-width: 200px">
+                                </div> --}}
+                                
+                            </div>
+                        @endforeach
+                    @endif
+                    
                 </div>
+                
             </div>
+           
         </div>
-    
     </body>
 </html>

@@ -36,6 +36,9 @@
                             {{-- treść --}}
                             <label for="description">Treść ogłoszenia</label>
                             <textarea name="description" id="description" placeholder="Podaj treść ogłoszenia"  class="form-control"></textarea>
+                            {{-- cena --}}
+                            <label for="price">Cena</label>
+                            <input name="price" id="price" class="form-control"> 
                             {{-- województwa --}}
                             <label for="region">Województwo</label>
                             <select class="form-control" name="region">
