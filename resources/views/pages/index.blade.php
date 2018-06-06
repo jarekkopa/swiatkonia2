@@ -29,9 +29,11 @@
                 <div class="col-sm-10">
                     <h5>
                         <ul>
-                            @foreach($adverts as $advert)
-                                <li>  {{ $advert->title }} </li>
-                            @endforeach
+                           @if(count($adverts) > 0)
+                                @foreach($adverts as $advert)
+                                    <li>  {{ $advert->title }} </li>
+                                @endforeach
+                            @endif
                         </ul>
                     </h5>
                 </div>
