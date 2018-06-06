@@ -28,7 +28,8 @@
         {{-- content         --}}
                 <div class="col-sm-10">
                     <div class="col-sm-5">
-                        <form action="" method="POST">
+                        <form action="{{ action('AdvertsController@store') }}" method="POST">
+                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                             {{-- tytuł --}}
                             <label for="title">Tytuł ogłoszenia</label>
                             <input name="title" id="title" placeholder="Podaj tytuł ogłoszenia" size="50" class="form-control">
@@ -37,11 +38,12 @@
                             <textarea name="description" id="description" placeholder="Podaj treść ogłoszenia"  class="form-control"></textarea>
                             {{-- województwa --}}
                             <label for="region">Województwo</label>
-                            <select class="form-control">
+                            <select class="form-control" name="region">
                                 @foreach($regions as $region)
                                     <option value="{{ $region->id }}">{{ $region->name }}</option>
                                 @endforeach
                             </select>
+                            <button type="submit" class="btn btn-danger">Wyślij</button>
                         </form>
                         
                     </div>

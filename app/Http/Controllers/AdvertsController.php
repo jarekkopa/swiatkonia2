@@ -41,11 +41,13 @@ class AdvertsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
+            'region' => 'required',
         ]);
 
         $advert = new Advert;
         $advert->title = $request->input('title');
-        $advert->title = $request->input('description');
+        $advert->description = $request->input('description');
+        $advert->state = $request->input('region');
         $advert->save();
 
         return redirect('/');
