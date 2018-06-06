@@ -28,22 +28,24 @@
         {{-- content         --}}
                 <div class="col-sm-10">
                     <div class="col-sm-5">
-                        {!! Form::open(['action' => 'AdvertsController@store', 'method' => 'POST']) !!}
-                        <div>
+                        <form action="{{ action('AdvertsController@store') }}" method="POST">
+                            <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                             {{-- tytuł --}}
-                            {{ Form::label ('title', 'Tytuł:')}} 
-                            {{ Form::text('title', '', ['class' => 'form-control'])}}
-                        </div>
-                        <div>
-                            {{-- opis --}}
-                            {{ Form::label ('description', 'Treść ogłoszenia:')}}
-                            {{ Form::textarea('description', '', ['class' => 'form-control'])}}
-                        </div>
-                        <div>
-                            {{-- wyślij --}}
-                            {{ Form::submit('Wyślij ogłoszenie', ['class' => 'btn btn-danger'])}}
-                        </div>
-                        {!! Form::close() !!}
+                            <label for="title">Tytuł ogłoszenia</label>
+                            <input name="title" id="title" placeholder="Podaj tytuł ogłoszenia" size="50" class="form-control">
+                            {{-- treść --}}
+                            <label for="description">Treść ogłoszenia</label>
+                            <textarea name="description" id="description" placeholder="Podaj treść ogłoszenia"  class="form-control"></textarea>
+                            {{-- województwa --}}
+                            <label for="region">Województwo</label>
+                            <select class="form-control" name="region">
+                                @foreach($regions as $region)
+                                    <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-danger">Wyślij</button>
+                        </form>
+                        
                     </div>
                 </div>
             </div>

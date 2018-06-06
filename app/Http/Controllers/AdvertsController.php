@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Advert;
+use App\Region;
 
 class AdvertsController extends Controller
 {
@@ -25,7 +26,8 @@ class AdvertsController extends Controller
      */
     public function create()
     {
-        return view('pages.adverts.create');
+        $region = Region::all(); // pobranie wszystkich województw z bazy
+        return view('pages.adverts.create')->with('regions', $region);
     }
 
     /**
@@ -39,11 +41,13 @@ class AdvertsController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
+            'region' => 'required',
         ]);
 
         $advert = new Advert;
         $advert->title = $request->input('title');
-        $advert->title = $request->input('description');
+        $advert->description = $request->input('description');
+        $advert->state = $request->input('region');
         $advert->save();
 
         return redirect('/');
