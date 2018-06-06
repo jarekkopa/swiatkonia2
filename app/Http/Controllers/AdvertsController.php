@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Advert;
+use App\Region;
 
 class AdvertsController extends Controller
 {
@@ -25,7 +26,8 @@ class AdvertsController extends Controller
      */
     public function create()
     {
-        return view('pages.adverts.create');
+        $region = Region::all(); // pobranie wszystkich województw z bazy
+        return view('pages.adverts.create')->with('regions', $region);
     }
 
     /**

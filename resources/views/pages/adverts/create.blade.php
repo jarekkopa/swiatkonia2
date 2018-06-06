@@ -28,13 +28,22 @@
         {{-- content         --}}
                 <div class="col-sm-10">
                     <div class="col-sm-5">
-                        <form action="" method="POST>
+                        <form action="" method="POST">
+                            {{-- tytuł --}}
                             <label for="title">Tytuł ogłoszenia</label>
                             <input name="title" id="title" placeholder="Podaj tytuł ogłoszenia" size="50" class="form-control">
-
+                            {{-- treść --}}
                             <label for="description">Treść ogłoszenia</label>
                             <textarea name="description" id="description" placeholder="Podaj treść ogłoszenia"  class="form-control"></textarea>
+                            {{-- województwa --}}
+                            <label for="region">Województwo</label>
+                            <select class="form-control">
+                                @foreach($regions as $region)
+                                    <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                @endforeach
+                            </select>
                         </form>
+                        
                     </div>
                 </div>
             </div>

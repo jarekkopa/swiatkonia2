@@ -20,6 +20,7 @@ class CreateSubcategoriesTable extends Migration
         });
     }
 
+
     /**
      * Reverse the migrations.
      *
