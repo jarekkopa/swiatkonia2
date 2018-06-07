@@ -15,7 +15,7 @@ class AdvertsController extends Controller
      */
     public function index()
     {
-        $advert = Advert::all();
+        $advert = Advert::orderBy('id', 'desc')->paginate(2);
 
         return view('pages.index')->with('adverts', $advert);
     }
@@ -44,6 +44,7 @@ class AdvertsController extends Controller
             'description' => 'required',
             'region' => 'required',
             'price' => 'numeric',
+            'phone' => 'numeric',
         ]);
 
         $advert = new Advert;
@@ -51,6 +52,7 @@ class AdvertsController extends Controller
         $advert->description = $request->input('description');
         $advert->state = $request->input('region');
         $advert->price = $request->input('price');
+        $advert->phone = $request->input('phone');
         $advert->save();
 
         return redirect('/');

@@ -16,7 +16,7 @@
         {{-- slider --}}
         @include('pages.inc.slider');
        
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
         {{-- breadcrumos --}}
                 <h7>Tutaj jesteś: Home > coś tam - zrobić @inslude dla breadcrumps</h7>
@@ -24,9 +24,9 @@
 
             <div class="row">
         {{-- lewa kolumna --}}
-                <div class="col-sm-2"><h5>lewa kolumna np. na menu kategorii lub filtry wyszukujące</h5> </div>
+                <div class="col-sm-3"><h5>lewa kolumna np. na menu kategorii lub filtry wyszukujące</h5> </div>
         {{-- content         --}}
-                <div class="col-sm-10">
+                <div class="col-sm-9">
                     <div class="col-sm-5">
                         <form action="{{ action('AdvertsController@store') }}" method="POST">
                             <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
@@ -46,6 +46,12 @@
                                     <option value="{{ $region->id }}">{{ $region->name }}</option>
                                 @endforeach
                             </select>
+                            <hr>
+                            <h5>DANE KONTAKTOWE</h5>
+                            {{-- TELEFON --}}
+                            <label for="phone">Telefon</label>
+                            <input name="phone" id="phone" class="form-control"> 
+
                             <button type="submit" class="btn btn-danger">Wyślij</button>
                         </form>
                         
