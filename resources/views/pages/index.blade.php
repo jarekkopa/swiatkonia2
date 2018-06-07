@@ -29,18 +29,18 @@
                                 <div class="card">
                                         <h5 class="card-header">{{ $advert->title }} <span class="badge badge-danger">Nowe</span></h5>
                                         <div class="card-body">
-                                            {{-- <h5 class="card-title">Special title treatment</h5> --}}
                                             <p class="card-text">{{ str_limit($advert->description, 300) }} </p>
                                             <p class="card-text">
                                                 {{-- sprawdzenie czy podano cenę --}}
                                                 @if($advert->price)
-                                                    {{ $advert->price }} zł</p>
+                                                    Cena: {{ $advert->price }} zł</p>
                                                 @else
                                                     Cena: Za darmo
                                                 @endif
                                             <p>
                                             <a href="{{ route('adverts.show', $advert->id) }}" class="btn btn-outline-danger">Zobacz</a>
                                         </div>
+                                        <div class="small">{{ str_limit($advert->created_at, 10) }}</div>
                                         </div>
                                         <p></p>
                         
@@ -50,6 +50,7 @@
                                 
                             </div>
                         @endforeach
+                        {{ $adverts->links() }}
                     @endif
                     
                 </div>
@@ -57,5 +58,6 @@
             </div>
            
         </div>
+        
     </body>
 </html>
