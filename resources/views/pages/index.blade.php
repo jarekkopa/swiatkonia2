@@ -18,6 +18,7 @@
 
         <div class="container">
             <div class="row">
+                @include('pages.inc.messages');
         {{-- lewa kolumna --}}
                 <div class="col-sm-3">lewa kolumna np. na menu kategorii lub filtry wyszukujące </div>
 

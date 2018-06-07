@@ -18,6 +18,7 @@
        
         <div class="container">
             <div class="row">
+                    @include('pages.inc.messages');
         {{-- breadcrumos --}}
                 <h7>Tutaj jesteś: Home > coś tam - zrobić @inslude dla breadcrumps</h7>
             </div>
