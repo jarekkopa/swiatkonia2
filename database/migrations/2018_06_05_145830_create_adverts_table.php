@@ -38,6 +38,8 @@ class CreateAdvertsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adverts');
+        Schema::table('arverts', function (Blueprint $table) {
+            $table->dropColumn('image');
+        });
     }
 }

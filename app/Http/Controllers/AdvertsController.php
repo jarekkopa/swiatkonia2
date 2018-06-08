@@ -56,6 +56,7 @@ class AdvertsController extends Controller
             'region' => 'required',
             'price' => 'numeric',
             'phone' => 'numeric',
+            'category' => 'required',
         ]);
 
         $advert = new Advert;
@@ -64,6 +65,10 @@ class AdvertsController extends Controller
         $advert->state = $request->input('region');
         $advert->price = $request->input('price');
         $advert->phone = $request->input('phone');
+        $advert->category = $request->input('category');
+        if ($request->input('subcategory')) {
+            $advert->subcategory = $request->input('subcategory');
+        }
         $advert->save();
 
         return redirect('/');
