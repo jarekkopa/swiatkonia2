@@ -48,6 +48,17 @@
                                 @endforeach
                             </select>
                             <hr>
+                            <select name="category" class="form-control">
+                                    <option value="">--Select Category--</option>
+                                    @foreach ($categories as $category => $value)
+                                        <option value="{{ $category }}"> {{ $value }}</option>   
+                                    @endforeach
+                                </select>
+                            <hr>
+                            <select name="subcategory" class="form-control">
+                                <option>--Sub--</option>
+                            </select>
+                            <hr>
                             <h5>DANE KONTAKTOWE</h5>
                             {{-- TELEFON --}}
                             <label for="phone">Telefon</label>
@@ -60,6 +71,7 @@
                 </div>
             </div>
         </div>
-    
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
     </body>
 </html>
