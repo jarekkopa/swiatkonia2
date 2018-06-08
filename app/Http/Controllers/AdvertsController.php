@@ -8,6 +8,7 @@ use App\Region;
 use App\Category;
 use App\Subcategory;
 use DB;
+use Auth;
 
 use Illumiante\Support\Facades\Input;
 
@@ -60,6 +61,7 @@ class AdvertsController extends Controller
         ]);
 
         $advert = new Advert;
+        $advert->user = Auth::id(); // pobranie ID zalogowanego usera i przypisanie do pola user w DB
         $advert->title = $request->input('title');
         $advert->description = $request->input('description');
         $advert->state = $request->input('region');
