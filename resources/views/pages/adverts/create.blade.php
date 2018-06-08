@@ -27,7 +27,7 @@
                 {{-- content --}}
                 <div class="col-sm-9">
 
-                    <form action="{{ action('AdvertsController@store') }}" method="POST">
+                    <form action="{{ action('AdvertsController@store') }}" method="POST" enctype="multipart/form-data">
                         <input name="_token" type="hidden" value="{{ csrf_token() }}" /> {{-- tytuł --}}
                         <label for="title">Tytuł ogłoszenia</label>
                         <input name="title" id="title" placeholder="Podaj tytuł ogłoszenia" size="50" class="form-control"> {{-- treść --}}
@@ -61,7 +61,10 @@
                         {{-- TELEFON --}}
                         <label for="phone">Telefon</label>
                         <input name="phone" id="phone" class="form-control">
-
+                        {{-- ZDJĘCIA --}}
+                        <label for="foto">Zdjęcia</label>
+                        <input  class="form-control" type="file" name="file[]" multiple="true">
+                        {{-- wyślij --}}
                         <button type="submit" class="btn btn-danger">Wyślij</button>
                     </form>
 
