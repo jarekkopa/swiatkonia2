@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Advert;
 use App\Region;
+use App\Category;
+use App\Subcategory;
+
+use Illumiante\Support\Facades\Input;
 
 class AdvertsController extends Controller
 {
