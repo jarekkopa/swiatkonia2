@@ -51,6 +51,16 @@ class AdvertsController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->hasFile('file'))
+        {
+            foreach($request->file as $file)
+            {
+                $filename = $file->getClientOriginalName();
+                print_r($filename);
+                
+            }
+        }
+        die();
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
@@ -62,15 +72,16 @@ class AdvertsController extends Controller
 
         $advert = new Advert;
         $advert->user = Auth::id(); // pobranie ID zalogowanego usera i przypisanie do pola user w DB
-        $advert->title = $request->input('title');
-        $advert->description = $request->input('description');
-        $advert->state = $request->input('region');
-        $advert->price = $request->input('price');
-        $advert->phone = $request->input('phone');
-        $advert->category = $request->input('category');
-        if ($request->input('subcategory')) {
+        $advert->title = $request->input('title'); // dodanie tytułu
+        $advert->description = $request->input('description'); // dodanie opisu
+        $advert->state = $request->input('region'); // dodanie województwa
+        $advert->price = $request->input('price'); // dodanie ceny
+        $advert->phone = $request->input('phone'); // dodanie telefonu
+        $advert->category = $request->input('category'); // dodanie kategorii
+        if ($request->input('subcategory')) { // jeśli wybrano = dodanie subkategorii
             $advert->subcategory = $request->input('subcategory');
         }
+        
         $advert->save();
 
         return redirect('/');
