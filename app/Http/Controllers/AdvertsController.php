@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Advert;
 use App\Region;
+use App\Category;
+use App\Subcategory;
+use DB;
+
+use Illumiante\Support\Facades\Input;
 
 class AdvertsController extends Controller
 {
+    public function getSubcategories($id)
+    {
+        $subcategories = DB::table("subcategories")->where("category",$id)->pluck("name","id");
+        return json_encode($subcategories);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +38,8 @@ class AdvertsController extends Controller
     public function create()
     {
         $region = Region::all(); // pobranie wszystkich województw z bazy
-        return view('pages.adverts.create')->with('regions', $region);
+        $categories = DB::table('categories')->pluck("name","id");
+        return view('pages.adverts.create')->with(['regions' => $region, 'categories' => $categories]);
     }
 
     /**

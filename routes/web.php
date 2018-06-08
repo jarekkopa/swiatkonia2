@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'AdvertsController@index')->name('index'); // kieruje na stronę główną
+Route::get('subcategories/get/{id}', 'AdvertsController@getSubcategories');
 
 Route:: resource('adverts', 'AdvertsController'); // 1 routa dla wszystkich metod controllera AdvertsController
 Auth::routes();
