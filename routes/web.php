@@ -18,3 +18,7 @@ Route:: resource('adverts', 'AdvertsController'); // 1 routa dla wszystkich meto
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', function(){ // dodałem ten logout bo routa nie działałą
+    Auth::logout();
+    return Redirect::to('login');
+ });
