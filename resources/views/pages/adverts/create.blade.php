@@ -9,7 +9,7 @@
         <script src="{{url('assets/js/components/bootstrap.js')}}"></script>
 
         <title>Test</title>
-    <body>
+<body>
         {{-- menu górne --}}
         @include('pages.inc.navbar'); 
         
