@@ -8,6 +8,7 @@ use App\Region;
 use App\Category;
 use App\Subcategory;
 use DB;
+use Auth;
 
 use Illumiante\Support\Facades\Input;
 
@@ -56,14 +57,20 @@ class AdvertsController extends Controller
             'region' => 'required',
             'price' => 'numeric',
             'phone' => 'numeric',
+            'category' => 'required',
         ]);
 
         $advert = new Advert;
+        $advert->user = Auth::id(); // pobranie ID zalogowanego usera i przypisanie do pola user w DB
         $advert->title = $request->input('title');
         $advert->description = $request->input('description');
         $advert->state = $request->input('region');
         $advert->price = $request->input('price');
         $advert->phone = $request->input('phone');
+        $advert->category = $request->input('category');
+        if ($request->input('subcategory')) {
+            $advert->subcategory = $request->input('subcategory');
+        }
         $advert->save();
 
         return redirect('/');

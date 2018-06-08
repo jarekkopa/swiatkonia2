@@ -25,8 +25,6 @@ class CreateAdvertsTable extends Migration
             $table->string('state')->nullable();
             $table->integer('phone')->nullable();
             $table->string('email')->nullable();
-            $table->string('image')->nullable();
-            $table->dateTime('publishDate');
             $table->timestamps();
         });
     }
