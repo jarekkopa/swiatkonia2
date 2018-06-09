@@ -79,6 +79,11 @@ class AdvertsController extends Controller
         // DODAWANIE ZDJĘCIA
         if($request->hasFile('file')) // sprawdzenie czy w requescie jest plik
         {
+            // pobranie ostatniego ogłoszenia usera z bazy
+            $lastUserAdvert = Advert::orderby('id', 'desc')->where('user', Auth::id())->first();
+            // przypisanie ID ostatniego ogłoszenia do zmiennej 
+            $lastUserAdvertId = $lastUserAdvert->id;
+            
             foreach($request->file as $file)
             {
                 $fileName = $file->getClientOriginalName();
@@ -92,7 +97,7 @@ class AdvertsController extends Controller
                 $picture = new Picture; 
                 $picture->fileName = $unique_filename;
                 $picture->fileSize = $filesize;
-                $picture->advertId = 1; // to musi być zmienione, żeby zaciągało ID ogłoszenia do którego dodano zdjęcie - muszę pobrać ID ostatniego ogłoszenia które dodał user
+                $picture->advertId = $lastUserAdvertId; // zapisanie w bazie ID ogłoszenia do którego przypisane są zdjęcia
                 $picture->save();
             }
         }
