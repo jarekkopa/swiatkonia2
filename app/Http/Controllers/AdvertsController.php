@@ -7,6 +7,7 @@ use App\Advert;
 use App\Region;
 use App\Category;
 use App\Subcategory;
+use App\Picture;
 use DB;
 use Auth;
 
@@ -51,16 +52,31 @@ class AdvertsController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->hasFile('file'))
+
+        // przenieść to niżej
+        if($request->hasFile('file')) // sprawdzenie czy w requwscie jest plik
         {
             foreach($request->file as $file)
             {
-                $filename = $file->getClientOriginalName();
-                print_r($filename);
+                $fileName = $file->getClientOriginalName();
+                $filesize = $file->getClientSize();
+                // potrzebuję ID ogłoszenia więc najpierw muszę je dodać a potem pobrać ostatnie ogłoszenia (id) i dodać do zdjęć
+                $unique_filename = md5( time())."_".$fileName; // zmieniam nazwę pliku na unikatową dodając timestamp i łącząc go z nazwą pliku
+                $path = 'images';
+                $file->storeAs($path, $unique_filename);
                 
+                $picture = new Picture;
+                $picture->fileName = $unique_filename;
+                $picture->fileSize = $filesize;
+                $picture->advertId = 1;
+                $picture->save();
+               
+                // dopisać zapis w bazie - musi być w pętli
             }
         }
         die();
+
+
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
