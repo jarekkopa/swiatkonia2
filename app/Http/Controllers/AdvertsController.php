@@ -52,31 +52,7 @@ class AdvertsController extends Controller
      */
     public function store(Request $request)
     {
-
-        // przenieść to niżej
-        if($request->hasFile('file')) // sprawdzenie czy w requwscie jest plik
-        {
-            foreach($request->file as $file)
-            {
-                $fileName = $file->getClientOriginalName();
-                $filesize = $file->getClientSize();
-                // potrzebuję ID ogłoszenia więc najpierw muszę je dodać a potem pobrać ostatnie ogłoszenia (id) i dodać do zdjęć
-                $unique_filename = md5( time())."_".$fileName; // zmieniam nazwę pliku na unikatową dodając timestamp i łącząc go z nazwą pliku
-                $path = 'images';
-                $file->storeAs($path, $unique_filename);
-                
-                $picture = new Picture;
-                $picture->fileName = $unique_filename;
-                $picture->fileSize = $filesize;
-                $picture->advertId = 1;
-                $picture->save();
-               
-                // dopisać zapis w bazie - musi być w pętli
-            }
-        }
-        die();
-
-
+        // WALIDACJA DANYCH
         $this->validate($request, [
             'title' => 'required',
             'description' => 'required',
@@ -86,6 +62,7 @@ class AdvertsController extends Controller
             'category' => 'required',
         ]);
 
+        // DODANIE OGŁOSZENIA DO BAZY
         $advert = new Advert;
         $advert->user = Auth::id(); // pobranie ID zalogowanego usera i przypisanie do pola user w DB
         $advert->title = $request->input('title'); // dodanie tytułu
@@ -97,9 +74,28 @@ class AdvertsController extends Controller
         if ($request->input('subcategory')) { // jeśli wybrano = dodanie subkategorii
             $advert->subcategory = $request->input('subcategory');
         }
-        
         $advert->save();
 
+        // DODAWANIE ZDJĘCIA
+        if($request->hasFile('file')) // sprawdzenie czy w requescie jest plik
+        {
+            foreach($request->file as $file)
+            {
+                $fileName = $file->getClientOriginalName();
+                $filesize = $file->getClientSize();
+                // potrzebuję ID ogłoszenia więc najpierw muszę je dodać a potem pobrać ostatnie ogłoszenia (id) i dodać do zdjęć
+                $unique_filename = md5(time())."_".$fileName; // zmieniam nazwę pliku na unikatową dodając timestamp i łącząc go z nazwą pliku
+                $path = 'public/advert_images'; // zapis pliku do storage/app/public/advert_mages
+                $file->storeAs($path, $unique_filename); // wskazuję ścieżkę do zapisu pliku i go zapisuję
+                
+                // zapis danych o pliku w DB
+                $picture = new Picture; 
+                $picture->fileName = $unique_filename;
+                $picture->fileSize = $filesize;
+                $picture->advertId = 1; // to musi być zmienione, żeby zaciągało ID ogłoszenia do którego dodano zdjęcie - muszę pobrać ID ostatniego ogłoszenia które dodał user
+                $picture->save();
+            }
+        }
         return redirect('/');
     }
 
