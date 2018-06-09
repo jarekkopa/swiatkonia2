@@ -28,8 +28,9 @@ class AdvertsController extends Controller
     public function index()
     {
         $advert = Advert::orderBy('id', 'desc')->paginate(2);
+        $picture = Picture::all();
 
-        return view('pages.index')->with('adverts', $advert);
+        return view('pages.index')->with(['adverts' => $advert, 'pictures' => $picture]);
     }
 
     /**
@@ -90,7 +91,7 @@ class AdvertsController extends Controller
                 $filesize = $file->getClientSize();
                 // potrzebuję ID ogłoszenia więc najpierw muszę je dodać a potem pobrać ostatnie ogłoszenia (id) i dodać do zdjęć
                 $unique_filename = md5(time())."_".$fileName; // zmieniam nazwę pliku na unikatową dodając timestamp i łącząc go z nazwą pliku
-                $path = 'public/advert_images'; // zapis pliku do storage/app/public/advert_mages
+                $path = '/public/images'; // zapis pliku do storage/app/public/advert_mages
                 $file->storeAs($path, $unique_filename); // wskazuję ścieżkę do zapisu pliku i go zapisuję
                 
                 // zapis danych o pliku w DB

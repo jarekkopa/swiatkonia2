@@ -20,6 +20,13 @@
                             @endif
                                 <a href="{{ route('adverts.show', $advert->id) }}" class="btn btn-outline-danger">Zobacz</a>
                         </div>
+                        <div> 
+                            @foreach($pictures as $picture) 
+                                @if( $advert->id == $picture->advertId )
+                                    <img src="{{ Storage::url('/images/'.$picture->fileName) }} " style="max-height: 60px">
+                                @endif
+                            @endforeach
+                        </div>
                     </div>  
                 </div>   
             </div>
