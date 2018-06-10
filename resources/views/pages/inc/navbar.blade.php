@@ -16,10 +16,6 @@
       @if (Auth::check())
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Profil</a>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link" href="#">Moje ogłoszenia</a>
         </li>
 
