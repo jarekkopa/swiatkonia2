@@ -48,18 +48,6 @@
                             </div>
                         </div> 
                         <div>
-                        {{-- województwa --}}
-                        <div class="form-group row">      
-                            <label for="region" class="col-sm-2 col-form-label">Województwo</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="region">
-                                    @foreach($regions as $region)
-                                    <option value="{{ $region->id }}">{{ $region->name }}</option>
-                                    @endforeach
-                                </select>
-                                <small id="regionHelpBlock" class="form-text text-muted">Pole obowiązkowe</small>
-                            </div>
-                        </div> 
                          {{-- kategoria --}}
                          <div class="form-group row">      
                             <label for="category" class="col-sm-2 col-form-label">Kategoria</label>
@@ -83,7 +71,6 @@
                             </div>
                         </div> 
                         {{-- cena --}}
-    
                         <div class="form-group row">      
                             <label for="price" class="col-sm-2 col-form-label">Cena</label>
                             <div class="col-sm-10">
@@ -123,6 +110,18 @@
                             <label for="foto" class="col-sm-2 col-form-label">Zdjęcia</label>
                             <div class="col-sm-10">
                                 <input  class="form-control" type="file" name="file[]" multiple="true">
+                            </div>
+                        </div> 
+                        {{-- województwa --}}
+                        <div class="form-group row">      
+                            <label for="region" class="col-sm-2 col-form-label">Województwo</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="region">
+                                    @foreach($regions as $region)
+                                    <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                    @endforeach
+                                </select>
+                                <small id="regionHelpBlock" class="form-text text-muted">Pole obowiązkowe</small>
                             </div>
                         </div> 
                         {{-- telefon --}}
