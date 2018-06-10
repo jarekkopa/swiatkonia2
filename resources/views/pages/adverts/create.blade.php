@@ -28,87 +28,116 @@
                 <div class="col-sm-9">
 
                     <form action="{{ action('AdvertsController@store') }}" method="POST" enctype="multipart/form-data">
+                        {{-- token --}}
                         <div>
                             <input name="_token" type="hidden" value="{{ csrf_token() }}" /> {{-- tytuł --}}
                         </div>
-                        <div>
-                            {{-- tytuł --}}
-                            <label for="title">Tytuł ogłoszenia</label>
-                            <input name="title" id="title" placeholder="Podaj tytuł ogłoszenia" size="50" class="form-control"> {{-- treść --}}
+                        {{-- tytuł --}}
+                        <div class="form-group row">      
+                            <label for="title" class="col-sm-2 col-form-label">Tytuł ogłoszenia</label>
+                            <div class="col-sm-10">
+                                <input  name="title" id="title" placeholder="Podaj tytuł ogłoszenia" size="50" class="form-control">
+                                <small id="titleHelpBlock" class="form-text text-muted">Pole obowiązkowe</small>
+                            </div>
                         </div>  
+                        <div class="form-group row">      
+                            <label for="description" class="col-sm-2 col-form-label">Treść ogłoszenia</label>
+                            <div class="col-sm-10">
+                                <textarea name="description" id="title" placeholder="Podaj tytuł ogłoszenia" size="50" class="form-control"></textarea>
+                                <small id="descriptioneHelpBlock" class="form-text text-muted">Pole obowiązkowe</small>
+                            </div>
+                        </div> 
                         <div>
-                            {{-- opis --}}
-                            <label for="description">Treść ogłoszenia</label>
-                            <textarea name="description" id="description" placeholder="Podaj treść ogłoszenia" class="form-control"></textarea>
-                        </div>
-                        <div>
-                            {{-- województwa --}}
-                            <label for="region">Województwo</label>
-                            <select class="form-control" name="region">
-                                @foreach($regions as $region)
-                                <option value="{{ $region->id }}">{{ $region->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div>
-                            {{-- kategoria --}}
-                            <label for="category">Kategoria</label>
-                            <select name="category" class="form-control">
-                                <option value="">--Wybierz kategorię--</option>
-                                @foreach ($categories as $category => $value)
-                                <option value="{{ $category }}"> {{ $value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div>
-                            {{-- podkategoria --}}
-                            <label for="subcategory">Podkategoria</label>
-                            <select name="subcategory" class="form-control">
-                                <option>--Wybierz podkategorię--</option>
-                            </select>
-                        </div>
-                        <div>
-                            {{-- cena --}}
-                            <label for="price">Cena</label>
-                            <input name="price" id="price" class="form-control" disabled>
-                        </div>
-                        <div>
-                            {{-- za darmo --}}
-                            <input type="checkbox" name="price-checkbox" id="price-checkbox" checked value="0"> Za darmo
-                        </div>
-                        <div>
-                            {{-- stan --}}
-                            <label for="price">Stan</label>
-                            <input name="condition" id="condition" class="form-control">
-                        </div>
-                        <div>
-                            {{-- marka --}}
-                            <label for="brand">Marka</label>
-                            <input name="brand" id="brand" class="form-control">
-                        </div>
-                        <div>
-                            {{-- kolor --}}
-                            <label for="color">kolor</label>
-                            <select class="form-control" name="color">
-                                @foreach($colors as $color)
-                                <option value="{{ $color->id }}">{{ $color->color }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div>
-                            {{-- djęcia --}}
-                            <label for="foto">Zdjęcia</label>
-                            <input  class="form-control" type="file" name="file[]" multiple="true">
-                        </div>
-                        <hr>
-                        <div>
-                            {{-- telefon --}}
-                            <label for="phone">Telefon</label>
-                            <input name="phone" id="phone" class="form-control">
-                        </div>
-                        <div>
+                        {{-- województwa --}}
+                        <div class="form-group row">      
+                            <label for="region" class="col-sm-2 col-form-label">Województwo</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="region">
+                                    @foreach($regions as $region)
+                                    <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                    @endforeach
+                                </select>
+                                <small id="regionHelpBlock" class="form-text text-muted">Pole obowiązkowe</small>
+                            </div>
+                        </div> 
+                         {{-- kategoria --}}
+                         <div class="form-group row">      
+                            <label for="category" class="col-sm-2 col-form-label">Kategoria</label>
+                            <div class="col-sm-10">
+                                <select name="category" class="form-control">
+                                    <option value="">--Wybierz kategorię--</option>
+                                    @foreach ($categories as $category => $value)
+                                    <option value="{{ $category }}"> {{ $value }}</option>
+                                    @endforeach
+                                </select>
+                                <small id="categoryHelpBlock" class="form-text text-muted">Pole obowiązkowe</small>
+                            </div>
+                        </div> 
+                        {{-- podkategoria --}}
+                        <div class="form-group row">      
+                            <label for="subcategory" class="col-sm-2 col-form-label">Podkategoria</label>
+                            <div class="col-sm-10">
+                                <select name="subcategory" class="form-control">
+                                    <option>--Wybierz podkategorię--</option>
+                                </select>
+                            </div>
+                        </div> 
+                        {{-- cena --}}
+    
+                        <div class="form-group row">      
+                            <label for="price" class="col-sm-2 col-form-label">Cena</label>
+                            <div class="col-sm-10">
+                                <input name="price" id="price" class="form-control" disabled>
+                                <input type="checkbox" name="price-checkbox" id="price-checkbox" checked value="0"> Za darmo
+                            </div>
+                        </div> 
+                        {{-- stan --}}
+                        <div class="form-group row">      
+                            <label for="condition" class="col-sm-2 col-form-label">Stan</label>
+                            <div class="col-sm-10">
+                                <input name="condition" id="condition" class="form-control">
+                                <small id="conditionelpBlock" class="form-text text-muted">Pole obowiązkowe</small>
+                            </div>
+                        </div> 
+                        {{-- marka  --}}
+                        <div class="form-group row">      
+                            <label for="brand" class="col-sm-2 col-form-label">Marka</label>
+                            <div class="col-sm-10">
+                                <input name="brand" id="brand" class="form-control">
+                                <small id="brandHelpBlock" class="form-text text-muted">Pole obowiązkowe</small>
+                            </div>
+                        </div> 
+                        {{-- kolor --}}
+                        <div class="form-group row">      
+                            <label for="color" class="col-sm-2 col-form-label">Kolor</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="color">
+                                    @foreach($colors as $color)
+                                    <option value="{{ $color->id }}">{{ $color->color }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div> 
+                        {{-- zdjęcia --}}
+                        <div class="form-group row">      
+                            <label for="foto" class="col-sm-2 col-form-label">Zdjęcia</label>
+                            <div class="col-sm-10">
+                                <input  class="form-control" type="file" name="file[]" multiple="true">
+                            </div>
+                        </div> 
+                        {{-- telefon --}}
+                        <div class="form-group row">      
+                            <label for="phone" class="col-sm-2 col-form-label">Telefon</label>
+                            <div class="col-sm-10">
+                                <input name="phone" id="phone" class="form-control">
+                            </div>
+                        </div> 
                         {{-- wyślij --}}
-                            <button style="margin-top: 10px" type="submit" class="btn btn-danger">Wyślij ogłoszenie</button>
+                        <div class="form-group row">      
+                            <label for="send" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <button style="margin-top: 10px" type="submit" class="btn btn-danger">Wyślij ogłoszenie</button>
+                            </div>
                         </div>
                     </form>
 
@@ -118,16 +147,7 @@
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/select_subselect.js') }}"></script>
-        <script type="application/javascript">
-        $("#price-checkbox").click( function(){   
-            if( $(this).is(':checked') ){
-                $("#price").attr("disabled",true);
-                $("#price").val("");
-            }else{
-                $("#price").removeAttr("disabled");
-            }
-         });
-        </script>
+        <script src="{{ asset('js/price_checkobox.js') }}"></script>
     </body>
 
 </html>

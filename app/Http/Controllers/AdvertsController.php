@@ -62,6 +62,7 @@ class AdvertsController extends Controller
             'region' => 'required',
             'phone' => 'numeric',
             'category' => 'required',
+            'price' => 'numeric',
             'color' => 'required',
         ]);
 
@@ -72,11 +73,11 @@ class AdvertsController extends Controller
         $advert->description = $request->input('description'); // dodanie opisu
         $advert->state = $request->input('region'); // dodanie województwa
         $advert->color = $request->input('color');
-        if($request->price)
+        if($request->price) // jeśli pole cena nie jest puste
         {
             $advert->price = $request->input('price'); // dodanie ceny
         }
-        else{
+        else{ // w przeciwnym wypadku wybrano opcję za darmo
             $advert->price = $request->input('price-checkbox'); // dodanie ceny
         }
         
