@@ -88,8 +88,12 @@
                         </div>
                         <div>
                             {{-- kolor --}}
-                            <label for="color">Kolor</label>
-                            <input name="color" id="color" class="form-control">
+                            <label for="color">kolor</label>
+                            <select class="form-control" name="color">
+                                @foreach($colors as $color)
+                                <option value="{{ $color->id }}">{{ $color->color }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div>
                             {{-- djęcia --}}
