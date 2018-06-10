@@ -60,7 +60,6 @@ class AdvertsController extends Controller
             'title' => 'required',
             'description' => 'required',
             'region' => 'required',
-            'price' => 'numeric',
             'phone' => 'numeric',
             'category' => 'required',
             'color' => 'required',
@@ -73,7 +72,14 @@ class AdvertsController extends Controller
         $advert->description = $request->input('description'); // dodanie opisu
         $advert->state = $request->input('region'); // dodanie województwa
         $advert->color = $request->input('color');
-        $advert->price = $request->input('price'); // dodanie ceny
+        if($request->price)
+        {
+            $advert->price = $request->input('price'); // dodanie ceny
+        }
+        else{
+            $advert->price = $request->input('price-checkbox'); // dodanie ceny
+        }
+        
         $advert->phone = $request->input('phone'); // dodanie telefonu
         $advert->category = $request->input('category'); // dodanie kategorii
         if ($request->input('subcategory')) { // jeśli wybrano = dodanie subkategorii

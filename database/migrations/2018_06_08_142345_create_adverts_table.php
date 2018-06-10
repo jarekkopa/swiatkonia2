@@ -23,6 +23,7 @@ class CreateAdvertsTable extends Migration
             $table->text('description')->nullable();
             $table->decimal('price', 8, 2)->nullable();
             $table->string('state')->nullable();
+            $table->string('color')->nullable();
             $table->integer('phone')->nullable();
             $table->string('email')->nullable();
             $table->timestamps();
