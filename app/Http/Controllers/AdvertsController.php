@@ -7,6 +7,7 @@ use App\Region;
 use App\Category;
 use App\Subcategory;
 use App\Picture;
+use App\Color;
 use DB;
 use Auth;
 
@@ -42,7 +43,8 @@ class AdvertsController extends Controller
     {
         $region = Region::all(); // pobranie wszystkich województw z bazy
         $categories = DB::table('categories')->pluck("name","id");
-        return view('pages.adverts.create')->with(['regions' => $region, 'categories' => $categories]);
+        $color = Color::all(); // pobieram kolory
+        return view('pages.adverts.create')->with(['regions' => $region, 'categories' => $categories, 'colors' => $color]);
     }
 
     /**
@@ -61,6 +63,7 @@ class AdvertsController extends Controller
             'price' => 'numeric',
             'phone' => 'numeric',
             'category' => 'required',
+            'color' => 'required',
         ]);
 
         // DODANIE OGŁOSZENIA DO BAZY
@@ -69,6 +72,7 @@ class AdvertsController extends Controller
         $advert->title = $request->input('title'); // dodanie tytułu
         $advert->description = $request->input('description'); // dodanie opisu
         $advert->state = $request->input('region'); // dodanie województwa
+        $advert->color = $request->input('color');
         $advert->price = $request->input('price'); // dodanie ceny
         $advert->phone = $request->input('phone'); // dodanie telefonu
         $advert->category = $request->input('category'); // dodanie kategorii
