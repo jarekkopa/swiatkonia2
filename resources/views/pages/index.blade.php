@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" href="{{url('css/app.css')}}" />
+
+
     <script src="{{url('assets/js/components/bootstrap.js')}}"></script>
 
     <title></title>
@@ -25,7 +27,6 @@
                 </div>
             </div>
         </div>
-
     </body>
 
 </html>

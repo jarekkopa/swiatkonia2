@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -15,6 +14,7 @@ use Illumiante\Support\Facades\Input;
 
 class AdvertsController extends Controller
 {
+    // Metoda do pobierania subkategorii w formularzu dodawania ogłoszenia
     public function getSubcategories($id)
     {
         $subcategories = DB::table("subcategories")->where("category",$id)->pluck("name","id");
@@ -27,10 +27,10 @@ class AdvertsController extends Controller
      */
     public function index()
     {
-        $advert = Advert::orderBy('id', 'desc')->paginate(2);
+        $advert = Advert::orderBy('id', 'desc')->paginate(5);
         $picture = Picture::all();
-
-        return view('pages.index')->with(['adverts' => $advert, 'pictures' => $picture]);
+        $category = Category::all();
+        return view('pages.index')->with(['adverts' => $advert, 'pictures' => $picture, 'categories' => $category]);
     }
 
     /**
