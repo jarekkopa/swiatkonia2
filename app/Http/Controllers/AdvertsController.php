@@ -64,6 +64,7 @@ class AdvertsController extends Controller
             'category' => 'required',
             'price' => 'numeric',
             'color' => 'required',
+            'file' => 'mimes:jpeg,jpg,png'
         ]);
 
         // DODANIE OGŁOSZENIA DO BAZY

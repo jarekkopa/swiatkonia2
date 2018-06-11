@@ -23,8 +23,7 @@
                                             {{ $category->name }}
                                         @endif
                                     @endforeach
-                                </span>
-                                
+                                </span>       
                             </p>
                             </p>
                                 <p class="card-text">

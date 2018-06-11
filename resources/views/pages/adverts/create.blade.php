@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('css/app.css')}}" />
     <script src="{{url('assets/js/components/bootstrap.js')}}"></script>
 
-    <title>Test</title>
+    <title>Dodaj ogłoszenie jeździeckie  kategorii akcesoria jeździeckie</title>
 
     <body>
         {{-- menu górne --}} @include('pages.inc.navbar'); {{-- slider --}} @include('pages.inc.slider');
@@ -110,6 +110,7 @@
                             <label for="foto" class="col-sm-2 col-form-label">Zdjęcia</label>
                             <div class="col-sm-10">
                                 <input  class="form-control" type="file" name="file[]" multiple="true">
+                                <small id="regionHelpBlock" class="form-text text-muted">Akceptowane są pliki JPG, PNG</small>
                             </div>
                         </div> 
                         {{-- województwa --}}
