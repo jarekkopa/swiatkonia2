@@ -2,7 +2,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Advert;
+
+use App\EquipmentAdvert;
 use App\Region;
 use App\Category;
 use App\Subcategory;
@@ -28,7 +29,7 @@ class AdvertsController extends Controller
      */
     public function index()
     {
-        $advert = Advert::orderBy('id', 'desc')->paginate(5);
+        $advert = EquipmentAdvert::orderBy('id', 'desc')->paginate(5);
         $picture = Picture::all();
         $category = Category::all();
         return view('pages.index')->with(['adverts' => $advert, 'pictures' => $picture, 'categories' => $category]);
@@ -64,11 +65,11 @@ class AdvertsController extends Controller
             'category' => 'required',
             'price' => 'numeric',
             'color' => 'required',
-            'file' => 'mimes:jpeg,jpg,png'
+            'file' => 'mimes:jpeg,jpg,png',
         ]);
 
         // DODANIE OGŁOSZENIA DO BAZY
-        $advert = new Advert;
+        $advert = new EquipmentAdvert;
         $advert->user = Auth::id(); // pobranie ID zalogowanego usera i przypisanie do pola user w DB
         $advert->title = $request->input('title'); // dodanie tytułu
         $advert->description = $request->input('description'); // dodanie opisu
@@ -93,7 +94,7 @@ class AdvertsController extends Controller
         if($request->hasFile('file')) // sprawdzenie czy w requescie jest plik
         {
             // pobranie ostatniego ogłoszenia usera z bazy
-            $lastUserAdvert = Advert::orderby('id', 'desc')->where('user', Auth::id())->first();
+            $lastUserAdvert = EquipmentAdvert::orderby('id', 'desc')->where('user', Auth::id())->first();
             // przypisanie ID ostatniego ogłoszenia do zmiennej 
             $lastUserAdvertId = $lastUserAdvert->id;
             

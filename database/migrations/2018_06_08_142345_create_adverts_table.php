@@ -13,7 +13,7 @@ class CreateAdvertsTable extends Migration
      */
     public function up()
     {
-        Schema::create('adverts', function (Blueprint $table) {
+        Schema::create('equipment_adverts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user')->nullable();
             $table->integer('category')->nullable();
@@ -37,6 +37,6 @@ class CreateAdvertsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('adverts');
+        Schema::dropIfExists('equipment_adverts');
     }
 }
