@@ -14,7 +14,7 @@ use Auth;
 
 use Illumiante\Support\Facades\Input;
 
-class AdvertsController extends Controller
+class EquipmentAdvertsController extends Controller
 {
     // Metoda do pobierania subkategorii w formularzu dodawania ogłoszenia
     public function getSubcategories($id)
@@ -64,8 +64,7 @@ class AdvertsController extends Controller
             'phone' => 'numeric',
             'category' => 'required',
             'price' => 'numeric',
-            'color' => 'required',
-            'file' => 'mimes:jpeg,jpg,png',
+            'color' => 'required'
         ]);
 
         // DODANIE OGŁOSZENIA DO BAZY

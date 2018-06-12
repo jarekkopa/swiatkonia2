@@ -27,7 +27,7 @@
                 {{-- content --}}
                 <div class="col-sm-9">
 
-                    <form action="{{ action('AdvertsController@store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ action('EquipmentAdvertsController@store') }}" method="POST" enctype="multipart/form-data">
                         {{-- token --}}
                         <div>
                             <input name="_token" type="hidden" value="{{ csrf_token() }}" /> {{-- tytuł --}}

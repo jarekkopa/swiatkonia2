@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', 'AdvertsController@index')->name('index'); // kieruje na stronę główną
-Route::get('subcategories/get/{id}', 'AdvertsController@getSubcategories');
+Route::get('/', 'EquipmentAdvertsController@index')->name('index'); // kieruje na stronę główną
+Route::get('subcategories/get/{id}', 'EquipmentAdvertsController@getSubcategories');
 
-Route:: resource('adverts', 'AdvertsController'); // 1 routa dla wszystkich metod controllera AdvertsController
+Route:: resource('adverts', 'EquipmentAdvertsController'); // 1 routa dla wszystkich metod controllera EquipmentAdvertsController
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
