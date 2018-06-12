@@ -12,8 +12,8 @@
 */
 
 Route::get('/', 'EquipmentAdvertsController@index')->name('index'); // kieruje na stronę główną
+Route::get('adverts/user/{id}', 'EquipmentAdvertsController@showUserAdverts')->name('user.adverts'); // wyświetla ogloszenia danego usera
 Route::get('subcategories/get/{id}', 'EquipmentAdvertsController@getSubcategories');
-Route::get('adverts/user/{id}', 'EquipmentAdvertsController@showUserAdverts')->name('user.adverts');
 
 Route:: resource('adverts', 'EquipmentAdvertsController'); // 1 routa dla wszystkich metod controllera EquipmentAdvertsController
 Auth::routes();

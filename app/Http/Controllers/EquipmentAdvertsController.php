@@ -19,20 +19,27 @@ class EquipmentAdvertsController extends Controller
     // Metoda do pobierania subkategorii w formularzu dodawania ogłoszenia
     public function getSubcategories($id)
     {
-        $subcategories = DB::table("subcategories")->where("category",$id)->pluck("name","id");
+        $subcategories = DB::table("subcategories")->where("category", $id)->pluck("name", "id");
         return json_encode($subcategories);
     }
 
-    public function showUserAdverts($id)
+    /**
+     * Wyświetla ogłoszenia danego usera
+     *
+     * @return \Illuminate\Http\Response
+     */
+    
+     public function showUserAdverts($id)
     {
         $advert = EquipmentAdvert::orderBy('id', 'desc')->where('user', $id)->paginate(5);
-        //$picture = Picture::all();
+        $picture = Picture::all(); // poprawić tak, żeby nie pobierać całej bazy
         $category = Category::all();
         return view('pages.adverts.user_adverts')
         ->with([
             'id'=>$id,
             'adverts' => $advert,
             'categories' => $category,
+            'pictures' => $picture,
             ]);
     }
 
@@ -48,8 +55,8 @@ class EquipmentAdvertsController extends Controller
         $category = Category::all();
         return view('pages.index')
         ->with([
-            'adverts' => $advert, 
-            'pictures' => $picture, 
+            'adverts' => $advert,
+            'pictures' => $picture,
             'categories' => $category
             ]);
     }
@@ -62,9 +69,14 @@ class EquipmentAdvertsController extends Controller
     public function create()
     {
         $region = Region::all(); // pobranie wszystkich województw z bazy
-        $categories = DB::table('categories')->pluck("name","id");
+        $categories = DB::table('categories')->pluck("name", "id");
         $color = Color::all(); // pobieram kolory
-        return view('pages.adverts.create')->with(['regions' => $region, 'categories' => $categories, 'colors' => $color]);
+        return view('pages.adverts.create')
+        ->with([
+            'regions' => $region,
+            'categories' => $categories,
+            'colors' => $color
+            ]);
     }
 
     /**
@@ -93,11 +105,9 @@ class EquipmentAdvertsController extends Controller
         $advert->description = $request->input('description'); // dodanie opisu
         $advert->state = $request->input('region'); // dodanie województwa
         $advert->color = $request->input('color');
-        if($request->price) // jeśli pole cena nie jest puste
-        {
+        if ($request->price) { // jeśli pole cena nie jest puste
             $advert->price = $request->input('price'); // dodanie ceny
-        }
-        else{ // w przeciwnym wypadku wybrano opcję za darmo
+        } else { // w przeciwnym wypadku wybrano opcję za darmo
             $advert->price = $request->input('price-checkbox'); // dodanie ceny
         }
         
@@ -109,15 +119,13 @@ class EquipmentAdvertsController extends Controller
         $advert->save();
 
         // DODAWANIE ZDJĘCIA
-        if($request->hasFile('file')) // sprawdzenie czy w requescie jest plik
-        {
+        if ($request->hasFile('file')) { // sprawdzenie czy w requescie jest plik
             // pobranie ostatniego ogłoszenia usera z bazy
             $lastUserAdvert = EquipmentAdvert::orderby('id', 'desc')->where('user', Auth::id())->first();
-            // przypisanie ID ostatniego ogłoszenia do zmiennej 
+            // przypisanie ID ostatniego ogłoszenia do zmiennej
             $lastUserAdvertId = $lastUserAdvert->id;
             
-            foreach($request->file as $file)
-            {
+            foreach ($request->file as $file) {
                 $fileName = $file->getClientOriginalName();
                 $filesize = $file->getClientSize();
                 // potrzebuję ID ogłoszenia więc najpierw muszę je dodać a potem pobrać ostatnie ogłoszenia (id) i dodać do zdjęć
@@ -126,7 +134,7 @@ class EquipmentAdvertsController extends Controller
                 $file->storeAs($path, $unique_filename); // wskazuję ścieżkę do zapisu pliku i go zapisuję
                 
                 // zapis danych o pliku w DB
-                $picture = new Picture; 
+                $picture = new Picture;
                 $picture->fileName = $unique_filename;
                 $picture->fileSize = $filesize;
                 $picture->advertId = $lastUserAdvertId; // zapisanie w bazie ID ogłoszenia do którego przypisane są zdjęcia
