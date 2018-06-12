@@ -1,4 +1,8 @@
- @if(count($adverts) > 0) @foreach($adverts as $advert)
+test {{ $id }}
+
+
+
+@if(count($adverts) > 0) @foreach($adverts as $advert)
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
@@ -26,13 +30,13 @@
                                 </span>       
                             </p>
                             </p>
-                                <p class="card-text">
+                                {{-- <p class="card-text">
                                     @foreach($pictures as $picture) @if( $advert->id == $picture->advertId )
                                     <a href="{{ Storage::url('images/'.$picture->fileName) }}" class="image-popup-vertical-fit">
                                         <img class="rounded" src="{{ Storage::url('images/'.$picture->fileName) }} " style="max-height: 60px">
                                     </a>
                                     @endif @endforeach
-                                </p>    
+                                </p>     --}}
                                 <div class="d-flex justify-content-between align-items-center">
 
                                     <div class="btn-group">

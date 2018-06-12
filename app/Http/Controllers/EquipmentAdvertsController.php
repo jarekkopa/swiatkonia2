@@ -22,6 +22,20 @@ class EquipmentAdvertsController extends Controller
         $subcategories = DB::table("subcategories")->where("category",$id)->pluck("name","id");
         return json_encode($subcategories);
     }
+
+    public function showUserAdverts($id)
+    {
+        $advert = EquipmentAdvert::orderBy('id', 'desc')->where('user', $id)->paginate(5);
+        //$picture = Picture::all();
+        $category = Category::all();
+        return view('pages.adverts.user_adverts')
+        ->with([
+            'id'=>$id,
+            'adverts' => $advert,
+            'categories' => $category,
+            ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +46,12 @@ class EquipmentAdvertsController extends Controller
         $advert = EquipmentAdvert::orderBy('id', 'desc')->paginate(5);
         $picture = Picture::all();
         $category = Category::all();
-        return view('pages.index')->with(['adverts' => $advert, 'pictures' => $picture, 'categories' => $category]);
+        return view('pages.index')
+        ->with([
+            'adverts' => $advert, 
+            'pictures' => $picture, 
+            'categories' => $category
+            ]);
     }
 
     /**
