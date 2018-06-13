@@ -23,6 +23,7 @@
 
                 {{-- content --}}
                 <div class="col-sm-9">
+
                     @include('pages.inc.show_new_adv')
                 </div>
             </div>

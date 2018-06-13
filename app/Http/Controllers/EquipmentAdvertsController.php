@@ -139,6 +139,9 @@ class EquipmentAdvertsController extends Controller
                 $picture->fileSize = $filesize;
                 $picture->advertId = $lastUserAdvertId; // zapisanie w bazie ID ogłoszenia do którego przypisane są zdjęcia
                 $picture->save();
+
+                // komunikat potwierdzający dodanie ogłoszenia do bazy
+                session()->flash('AdvertAddConfirm', 'Twoje ogłoszenie zosatało dodane do bazy danych');
             }
         }
         return redirect('/');

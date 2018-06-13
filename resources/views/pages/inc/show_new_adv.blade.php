@@ -1,3 +1,10 @@
+{{-- sprawdzenie, czy user dodał ogłoszenie; jeśli tak to wyświetlam komunikat --}}
+@if( session()->has('AdvertAddConfirm') )
+    <div class="alert alert-success" role="alert">
+        {{ session()->get('AdvertAddConfirm') }}
+    </div>
+@endif
+{{-- koniec komunikatu --}}
  @if(count($adverts) > 0) @foreach($adverts as $advert)
 <div class="container">
     <div class="row">
