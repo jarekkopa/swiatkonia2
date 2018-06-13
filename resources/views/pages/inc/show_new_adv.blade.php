@@ -39,9 +39,6 @@
                                         <a href="{{ route('adverts.show', $advert->id) }}">
                                             <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                                         </a>
-                                        <a href="#">
-                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                        </a>
                                     </div>
                                     <small class="text-muted">Dodano: {{ $advert->created_at, 10 }}</small>
                                 </div>
